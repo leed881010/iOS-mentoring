@@ -8,76 +8,75 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     
-    @IBOutlet private weak var numbericButton:UIButton?
-    @IBOutlet private weak var resultButton:UIButton?
-    @IBOutlet private weak var operatorButton:UIButton?
-    @IBOutlet private weak var resetButton:UIButton?
+    private var inputFirstNumberString: String = "";
+    private var inputSecondNumberString: String = "";
+    private var operatorChar: String = "";
+    private var resultText: String = "";
     
-    @IBOutlet private weak var resultLable:UILabel?
+    @IBOutlet private weak var resultLable: UILabel?
     
-    var inputNumber1:String = "";
-    var inputNumber2:String = "";
-    var operatorChar:String = "";
-    var resultText:String = "";
-    
-    @IBAction private func didClickNumbeicFunction(_ sender:UIButton){
-        print(#function);
-        
-        if(operatorChar.isEmpty || operatorChar == "" ){
-            inputNumber1 += sender.titleLabel!.text!
-            print("inputNumber1 ::: \(inputNumber1)")
-        }else{
-            inputNumber2 += sender.titleLabel!.text!
-            print("inputNumber2 ::: \(inputNumber2)")
-        }
-        
-    }
-    
-    @IBAction private func didClickOperatorFunction(_ sender:UIButton){
-        print(#function)
-        operatorChar = sender.titleLabel!.text!
-        print(operatorChar);
-    }
-    
-    @IBAction private func didClickResultFunction(_ sender:UIButton){
-        if (operatorChar.isEmpty || operatorChar == ""){
-            print("-")
-        }else{
-            let num1:Float32 = Float32(inputNumber1) ?? 0
-            let num2:Float32 = Float32(inputNumber2) ?? 0
-            
-            if (operatorChar == "+"){
-                resultText = String(num1 + num2);
-            }else if (operatorChar == "-"){
-                resultText = String(num1 - num2);
-            }else if (operatorChar == "x"){
-                resultText = String(num1 * num2);
-            }else if (operatorChar == "/"){
-                resultText = String(num1 / num2);
-            }
-            print("------ restult ------")
-            print("\(num1) \(operatorChar) \(num2) = \(resultText)")
-            print("---------------------")
-            inputNumber1 = resultText;
-            inputNumber2 = "";
-            print("inputNumber1 :: result :: \(inputNumber1)")
-            
-        }
-    }
-    
-    @IBAction private func didClickResetFunction(_ sender:UIButton){
-        inputNumber1 = "";
-        inputNumber2 = "";
-        operatorChar = "";
-    }
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    
+    @IBAction private func didClickNumbeicFunction(_ sender: UIButton){
+        print(#function);
+        
+        guard let newNumber = sender.titleLabel?.text else { return }
+        
+        if self.operatorChar.isEmpty {
+            self.inputFirstNumberString += newNumber
+            print("inputNumber1 ::: \(self.inputFirstNumberString)")
+        } else {
+            self.inputSecondNumberString += newNumber
+            print("inputNumber2 ::: \(self.inputSecondNumberString)")
+        }
+        
+    }
+    
+    @IBAction private func didClickOperatorFunction(_ sender: UIButton){
+        guard let newOperator = sender.titleLabel?.text else { return }
+        
+        print(#function)
+        self.operatorChar = newOperator
+        print(self.operatorChar);
+    }
+    
+    @IBAction private func didClickResultFunction(_ sender: UIButton){
+        guard !self.operatorChar.isEmpty,
+              let num1 = Double(self.inputFirstNumberString),
+              let num2 = Double(self.inputSecondNumberString) else {
+            print("-")
+            return
+        }
+        
+        if (self.operatorChar == "+"){
+            self.resultText = String(num1 + num2)
+        }else if (self.operatorChar == "-"){
+            self.resultText = String(num1 - num2)
+        }else if (self.operatorChar == "x"){
+            self.resultText = String(num1 * num2)
+        }else if (self.operatorChar == "/"){
+            self.resultText = String(num1 / num2)
+        }
+        print("------ restult ------")
+        print("\(num1) \(self.operatorChar) \(num2) = \(self.resultText)")
+        print("---------------------")
+        self.inputFirstNumberString = self.resultText
+        self.inputSecondNumberString = ""
+        self.operatorChar = ""
+        print("inputNumber1 :: result :: \(self.inputFirstNumberString)")
+    }
+    
+    @IBAction private func didClickResetFunction(_ sender: UIButton){
+        self.inputFirstNumberString = ""
+        self.inputSecondNumberString = ""
+        self.operatorChar = ""
+    }
 
 }
+
+
 
