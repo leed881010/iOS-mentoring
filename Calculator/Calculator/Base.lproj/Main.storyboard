@@ -52,7 +52,7 @@
                                                 <color key="backgroundColor" red="1" green="0.70913271029109048" blue="0.32889692583478225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                                <state key="normal" title="-">
+                                                <state key="normal">
                                                     <color key="titleShadowColor" name="AccentColor"/>
                                                 </state>
                                                 <connections>
@@ -253,7 +253,7 @@
                                                 <color key="backgroundColor" red="0.28924823663878163" green="0.28786505252634131" blue="0.29886068757047357" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                                <state key="normal" title="3">
+                                                <state key="normal">
                                                     <color key="titleShadowColor" name="AccentColor"/>
                                                 </state>
                                                 <connections>

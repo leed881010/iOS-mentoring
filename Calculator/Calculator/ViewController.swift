@@ -20,22 +20,19 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.calculator.delegate = self
         // Do any additional setup after loading the view.
     }
     
     @IBAction private func didClickNumbeicFunction(_ sender: UIButton){
         print(#function);
-        
-        guard let newNumberString = sender.titleLabel?.text else { return }
-        self.calculator.inputNewNumber(newNumberString)
+        self.calculator.inputNewNumber(sender.titleLabel?.text)
 
     }
     
     @IBAction private func didClickOperatorFunction(_ sender: UIButton){
-        guard let newOperator = sender.titleLabel?.text else { return }
-        
         print(#function)
-        self.calculator.inputNewOperator(newOperator)
+        self.calculator.inputNewOperator(sender.titleLabel?.text)
         print(self.operatorChar);
     }
     
@@ -49,3 +46,23 @@ class ViewController: UIViewController {
 
 }
 
+
+extension ViewController: CalculatorDelegate {
+    
+    func calculatorNoNumber() {
+        print("There is no Number")
+    }
+    
+    func calculatorNoOperator() {
+        print("There is no Operator")
+    }
+    
+    func calculatorNoResult() {
+        print("There is no Result")
+    }
+    
+    func calculatorDidChangeResult(_ result: Double) {
+        self.resultLable?.text = "\(result)"
+    }
+    
+}
