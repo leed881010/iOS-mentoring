@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  Calculator
 //
-//  Created by LEED on 2021/01/12.
+//  Created by 주민경 on 2021/01/12.
 //
 
 import UIKit
